@@ -1,0 +1,69 @@
+<!-- botones -->
+<section id="actions" class="py-4 mb-4 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <button type="button" class="btn btn-primary btn-block" data-bs-toggle="modal"
+                    data-bs-target="#agregarContactoModal">
+                    Agregar contacto
+                </button>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- lista de clientes-->
+<section id="guia">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Contactos</h4>
+                    </div>
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>Nombre</th>
+                                <th>Accion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for(contacto of contactos; track $index; let idx = $index) {
+                            <tr>
+                                <td>{{ idx }}</td>
+                                <td>{{ contacto.nombre }} {{ contacto.apellido }}</td>
+                                <td>
+                                    <a routerLink="/contacto/editar/{{ idx }}" class="btn btn-secondary">
+                                            <i class="fas fa-angle-double-right"></i>Detalle
+                                    </a>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="agregarContactoModal" tabindex="-1" aria-labelledby="agregarContactoModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-white">
+                <h1 class="modal-title" id="agregarContactoModalLabel">Agregar contacto</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    #botonCerrar></button>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
