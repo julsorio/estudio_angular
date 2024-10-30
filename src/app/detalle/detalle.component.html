@@ -1,0 +1,121 @@
+<header id="main-header" class="py-2 bg-info text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>
+                    <i class="fas fa-user"></i> Editar Contacto
+                </h1>
+            </div>
+        </div>
+    </div>
+
+</header>
+
+<!-- template form -->
+<form>
+    <!-- botones-->
+    <section id="actions" class="py-4 mb-4 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <a routerLink="/" class="btn btn-light btn-block">
+                        <i class="fas fa-arrow-left"></i> Regresar a inicio
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-success btn-block">
+                        <i class="fas fa-check"></i> Guardar contacto
+                    </button>
+                </div>
+                <div class="col-md-3">
+                    <a href="#" class="btn btn-danger btn-block">
+                        <i class="fas fa-trash"></i> Eliminar contacto
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="details">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Editar cliente</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="nombre">Nombre</label>
+                                <input type="text" name="nombre" #nombre="ngModel" class="form-control"
+                                    [(ngModel)]="contacto.nombre" required maxlength="50"
+                                    [ngClass]="{'is-invalid': nombre.errors && nombre.touched}" />
+                            </div>
+                            @if(nombre.invalid && (nombre.dirty || nombre.touched)) {
+                                <div>
+                                    @if(nombre.errors?.['required']) {
+                                        <div>nombre requerido</div>
+                                    }
+
+                                    @if(nombre.errors?.['maxlength']) {
+                                        <div>Debe contener minimo 50 caracteres</div>
+                                    }
+                                </div>
+                            }
+
+                            <div class="form-group">
+                                <label for="apellido">Apellido</label>
+                                <input type="text" name="apellido" #apellido="ngModel" class="form-control"
+                                    [(ngModel)]="contacto.apellido" required maxlength="2"
+                                    [ngClass]="{'is-invalid': apellido.errors && apellido.touched}" />
+                            </div>
+                            @if(apellido.invalid && (apellido.dirty || apellido.touched)) {
+                                <div>
+                                    @if(apellido.errors?.['required']) {
+                                        <div>apellido requerido</div>
+                                    }
+
+                                    @if(apellido.errors?.['maxlength']) {
+                                        <div>Debe contener minimo 50 caracteres</div>
+                                    }
+                                </div>
+                            }
+
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" #email="ngModel" class="form-control"
+                                    [(ngModel)]="cliente.email" required
+                                    pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                                    [ngClass]="{'is-invalid': email.errors && email.touched}" />
+                            </div>
+                            <div *ngIf="email.invalid && (email.dirty || email.touched)">
+                                <div *ngIf="email.errors?.['required']">
+                                    Email requerido
+                                </div>
+                                <div *ngIf="email.errors?.['pattern']">
+                                    Email no es valido
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="saldo">Saldo</label>
+                                <input type="number" name="saldo" #saldo="ngModel" class="form-control"
+                                    [(ngModel)]="cliente.saldo" required
+                                    [ngClass]="{'is-invalid': saldo.errors && saldo.touched}" />
+                            </div>
+                            <div *ngIf="saldo.invalid && (saldo.dirty || saldo.touched)">
+                                <div *ngIf="apellido.errors?.['required']">
+                                    Saldo requerido
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="hidden" name="id" [(ngModel)]="cliente.id" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>
